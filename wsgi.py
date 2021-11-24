@@ -349,20 +349,37 @@ def delete_moc_user(user_name):
 @APP.route("/quota/project/<project_name>", methods=["GET"])
 @AUTH.login_required
 def get_moc_quota(project_name):
-    return Repsonse
+    return Repsonse(
+        response=json.dumps({"msg": f"Get Quota ({project_name})"}),
+        status=400,
+        mimetype="application/json",
+    )
 
 @APP.route("/quota/project/<project_name>", methods=["DELETE"])
 @AUTH.login_required
-def delete_moc_quota(user_name):
+def delete_moc_quota(project_name):
+    return Repsonse(
+        response=json.dumps({"msg": f"Delete Quota ({project_name})"}),
+        status=400,
+        mimetype="application/json",
+    )
 
 @APP.route("/quota/project/<project_name>", methods=["PUT"])
 @AUTH.login_required
-def put_moc_quota(user_name):
-
+def put_moc_quota(project_name):
+    return Repsonse(
+        response=json.dumps({"msg": f"Put Quota ({project_name})"}),
+        status=400,
+        mimetype="application/json",
+    )
 @APP.route("/quota/project/<project_name>", methods=["PATCH"])
 @AUTH.login_required
-def patch_moc_quota(user_name):
-
+def patch_moc_quota(project_name):
+    return Repsonse(
+        response=json.dumps({"msg": f"Patch Quota ({project_name})"}),
+        status=400,
+        mimetype="application/json",
+    )
 
 if __name__ == "__main__":
     APP.run()
