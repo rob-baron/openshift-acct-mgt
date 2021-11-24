@@ -346,6 +346,23 @@ def delete_moc_user(user_name):
         mimetype="application/json",
     )
 
+@APP.route("/quota/project/<project_name>", methods=["GET"])
+@AUTH.login_required
+def get_moc_quota(project_name):
+    return Repsonse
+
+@APP.route("/quota/project/<project_name>", methods=["DELETE"])
+@AUTH.login_required
+def delete_moc_quota(user_name):
+
+@APP.route("/quota/project/<project_name>", methods=["PUT"])
+@AUTH.login_required
+def put_moc_quota(user_name):
+
+@APP.route("/quota/project/<project_name>", methods=["PATCH"])
+@AUTH.login_required
+def patch_moc_quota(user_name):
+
 
 if __name__ == "__main__":
     APP.run()

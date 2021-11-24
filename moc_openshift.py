@@ -93,10 +93,10 @@ class MocOpenShift:
         user = self.get_user(user_name)
         if (
             not (user.status_code == 200 or user.status_code == 201)
-            and user[identities]
+            and user["identities"]
         ):
             id_str = "{}:{}".format(id_provider, id_user)
-            for identity in user[identities]:
+            for identity in user["identities"]:
                 if identity == id_str:
                     return True
         return False
@@ -312,6 +312,10 @@ class MocOpenShift:
             mimetype="application/json",
         )
 
+    def quota_name(self, project_name, quota)
+        if isinstance(quota, str):
+            return quota
+        return f"{project_name}-project-quota"
 
 class MocOpenShift3x(MocOpenShift):
 
@@ -575,3 +579,32 @@ class MocOpenShift4x(MocOpenShift):
                 payload["metadata"][key] = rolebindings_json["metadata"][key]
         self.logger.debug("payload -> 2: " + json.dumps(payload))
         return self.put_request(url, payload, True)
+
+    # This is an expected used as:
+    #    1) The UI could use this
+    #    2) reporting could use this as well
+    def get_quota(self, project_name):
+        url = f"{self.get_url()}/api/v1/namespaces/{project_name}/resourcequotas"
+        return self.get_request(url,True)
+
+    def create_quota(self, quota_def):
+        #if isinstance(quota_def["quota"], str):
+        #    quota_name=quota_def["quota"]
+        #else:
+        #    quota_name=self.gen_quota_name(quota_def["namespace"])
+        url = f"{self.get_url()}/api/v1/namespaces/{quota_def["namespace"]}/resourcequotas/{quota_name}/status"
+
+        return self.post_request(url,payload,True)
+    
+    def update_quota(self, quota_def):
+ 
+        url = f"{self.get_url()}/api/v1/namespaces/{namequota_def["namespace"]}/resourcequotas/{quota_name}/status"
+
+        return self.put_request(url,payload,True)
+
+    def delete_quota(self, quota_def):
+
+        url = f"{self.get_url()}/api/v1/namespaces/{quota_def["namespace"]}/resourcequotas/{quota_name}/status"
+
+        return self.del_request(url,payload,True)
+
